@@ -2,7 +2,6 @@ var inputData = document.getElementById("input");
 console.log(inputData)
 
 function setNumber(num){
-    // inputData.value += num;
     var lastValue = inputData.value.toString().slice(inputData.value.length - 1);
 
     if(lastValue == "+" || lastValue == "-" || lastValue == "*" || lastValue == "/"){
@@ -50,17 +49,41 @@ function sqrt(){
     inputData.value = Math.sqrt(inputData.value);
 }
 
-function percentage(){
-    var value = inputData.value+ "%";
-    var result = 0;
-    if(value.endsWith("%")){
-        var x = parseFloat(value);
-        result = x/100;
-    }
-    if(value.endsWith("%") && value.includes("+")){
-        var [a,b] = value.split("+");
-        var c = b/100;
-        result = a + c;
-    }
+function percentage() {
+  var value = inputData.value+"%"
+  if (value.toString().includes("%")) {
+    var numb = parseFloat(value);
+
+    var result = numb / 100;
+
     inputData.value = result;
+  }
+  if (value.toString().includes("%") && value.toString().includes("+")) {
+    var numb = value.toString().split("+"); 
+    
+
+    var numb1 = Number(numb[0]);
+    var numb2 = numb[1]; 
+
+    var num3 = parseFloat(numb2) / 100;
+    var numb4 = parseFloat(num3) * Number(numb1); 
+    
+
+    var result = numb4 + numb1; 
+    inputData.value = result;
+  }
 }
+
+document.addEventListener("keydown", function (e){
+    e.preventDefault();
+
+    if(e.key == "Enter"){
+        equal();
+    }else if(Number(e.key) >=0 && Number(e.key) <=9){
+        setNumber(e.key);
+    }else if(e.key == "+" || e.key == "-" || e.key == "/" || e.key == "*"){
+        setNumber(e.key);
+    }else if(e.key == "Backspace"){
+        inputData.value = inputData.value.toString().slice(0,inputData.value.length-1);
+    }
+})
