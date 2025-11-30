@@ -75,7 +75,7 @@ function percentage() {
 }
 
 document.addEventListener("keydown", function (e){
-    e.preventDefault();
+    // e.preventDefault();
 
     if(e.key == "Enter"){
         equal();
