@@ -21,7 +21,9 @@ function setNumber(num){
 }
 
 function equal(){
-    inputData.value = eval(inputData.value);
+    let result = eval(inputData.value);
+    result = Number(result.toFixed(10));
+    inputData.value = result;
 }
 
 function newSet(){
